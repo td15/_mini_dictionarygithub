@@ -13,11 +13,32 @@ class GitHubDictionary:
             "workflow": "A set of automated processes defined in GitHub Actions.",
             "CI/CD": "Continuous Integration/Continuous Deployment - automating testing and deployment.",
             "action": "A reusable script used in GitHub Actions to automate workflows.",
+            "release": "A packaged version of your project, often including compiled binaries and documentation.",
+            "milestone": "A collection of issues and pull requests associated with a goal or project phase.",
+            "webhook": "A way to notify external services about events in a GitHub repository.",
+            "starring": "A way to mark repositories as favorites.",
+            "collaborator": "Someone with permissions to contribute to a repository.",
         }
     
     def lookup(self, term):
         return self.terms.get(term.lower(), "Term not found in dictionary.")
 
+    def add_term(self, term, definition):
+        self.terms[term.lower()] = definition
+        return f"Added: {term} -> {definition}"
+
+    def remove_term(self, term):
+        if term.lower() in self.terms:
+            del self.terms[term.lower()]
+            return f"Removed: {term}"
+        return "Term not found in dictionary."
+
+    def list_terms(self):
+        return "\n".join(sorted(self.terms.keys()))
+
 # Example Usage
 dictionary = GitHubDictionary()
-print(dictionary.lookup("fork"))  # Outputs explanation for 'fork'
+print(dictionary.lookup("fork"))  
+print(dictionary.add_term("tag", "A label that marks specific points in repository history."))
+print(dictionary.remove_term("gist"))  
+print(dictionary.list_terms())  
